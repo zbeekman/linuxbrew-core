@@ -1,0 +1,18 @@
+name: Check status
+description: Check the azure status after the checks pass
+author: iMichka
+branding:
+  icon: activity
+  color: green
+#inputs:
+  #github_token:
+    #description: Github token
+    #required: true
+#outputs:
+# to set output:
+#   echo "::set-output name=status::$status"
+  #status:
+    #description:
+runs:
+  using: docker
+  image: Dockerfile
