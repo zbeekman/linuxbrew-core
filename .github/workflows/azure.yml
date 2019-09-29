@@ -9,4 +9,10 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/azure
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Status
+        # set id so we can grab the output in later steps
+        # like that: ${{steps.status.outputs.status}}
+        id: status
+        uses: ./.github/workflows/azure
