@@ -8,8 +8,7 @@ if __name__ == "__main__":
     event_path = os.environ["GITHUB_EVENT_PATH"]
     event_data = json.load(open(event_path))
 
-    check_run = event_data["check_run"]
+    check_suite = event_data["check_suite"]
 
-    print(check_run["status"])
-    print(check_run["name"])
+    print(check_suite)
     sys.exit(78)
