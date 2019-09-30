@@ -11,4 +11,4 @@ if __name__ == "__main__":
     check_suite = event_data["check_suite"]
 
     print(check_suite)
-    sys.exit(78)
+    sys.exit(1)
