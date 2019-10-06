@@ -2,15 +2,12 @@ name: Check Azure Status
 
 on:
   check_suite:
-    types:
-      - completed
+    types: [completed]
 
 jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
       - name: Status
         # set id so we can grab the output in later steps
         # like that: ${{steps.status.outputs.status}}
