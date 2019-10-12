@@ -1,11 +1,12 @@
 name: Check Azure Status
 
 on:
-  pull_request:
+ check_suite:
+   types:
+     - completed
 
 jobs:
   build:
-    name: Check Azure Status
     runs-on: ubuntu-latest
     steps:
       - run: |
@@ -15,8 +16,7 @@ jobs:
           -H "Accept: application/vnd.github.v3+json; application/vnd.github.antiope-preview+json" \
           -X POST \
           -d '{
-            "name":"it-works",
-            "head_sha":"${{ github.event.check_suite.head_sha }}",
-            "status":"queued"
+            "state": "failure",
+            "description": "The build succeeded!"
             }' \
-          https://api.github.com/repos/Homebrew/linuxbrew-core/check-runs
+          https://api.github.com/repos/Homebrew/linuxbrew-core/statuses/${{ github.event.check_suite.head_sha }}
