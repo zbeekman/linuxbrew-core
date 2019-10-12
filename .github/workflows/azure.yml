@@ -17,6 +17,6 @@ jobs:
           -H "Content-Type: application/json" \
           -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           -H "Accept: application/vnd.github.v3+json; application/vnd.github.antiope-preview+json" \
-          -X PUT \
+          -X POST \
           -d '{"status":["in_progress"]}' \
-          https://api.github.com/repos/Homebrew/linuxbrew-core/pulls/15792
+          "${{ github.event.check_suite.url }}"
