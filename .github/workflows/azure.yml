@@ -1,8 +1,7 @@
 name: Check Azure Status
 
 on:
-  check_suite:
-    types: [completed]
+  pull_request:
 
 jobs:
   build:
