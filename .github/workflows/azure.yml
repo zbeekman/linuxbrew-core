@@ -1,7 +1,9 @@
 name: Check Azure Status
 
 on:
-  pull_request:
+  check_suite:
+    types:
+      - completed
 
 jobs:
   build:
@@ -19,3 +21,9 @@ jobs:
       # This step prints an output (time) from the previous step's action.
       - name: Echo the greeting's time
         run: echo 'The time was ${{ steps.hello.outputs.time }}.'
+      - run: |
+          curl -sSL \
+          -H "Content-Type: application/json" \
+          -H "Accept: application/vnd.github.v3+json; application/vnd.github.antiope-preview+json" \
+          -d '{"status":["in_progress"]}'
+          https://api.github.com/repos/Homebrew/linuxbrew-core/
