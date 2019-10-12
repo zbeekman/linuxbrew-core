@@ -18,5 +18,10 @@ jobs:
           -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           -H "Accept: application/vnd.github.v3+json; application/vnd.github.antiope-preview+json" \
           -X POST \
-          -d '{"status":["in_progress"]}' \
-          "${{ github.event.check_suite.url }}"
+          -d '{
+            "name":"it works",
+            "head_sha":"${{ github.event.check_suite.head_sha }}",
+            "status":"in_progress",
+            "output":{"title": "It works report 1","summary": "It works report 2","text": "It works report 3"}
+            }' \
+          https://api.github.com/repos/Homebrew/linuxbrew-core/check-runs
