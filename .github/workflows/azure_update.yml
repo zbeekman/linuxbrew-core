@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Greeting
+    name: Check Azure Status
     runs-on: ubuntu-latest
     steps:
       - run: |
@@ -19,8 +19,7 @@ jobs:
           -d '{
             "name":"it-works",
             "head_sha":"${{ github.event.check_suite.head_sha }}",
-            "status":"queued",
-            "output":{"title": "It works report 1","summary": "It works report 2"},
-            "images":{"alt": "alt","image_url": "https://avatars1.githubusercontent.com/in/9426?s=40&v=4"}
+            "status":"completed",
+            "conclusion":"neutral"
             }' \
           https://api.github.com/repos/Homebrew/linuxbrew-core/check-runs
