@@ -7,9 +7,7 @@ on:
 
 jobs:
   build:
-    # Job name is Greeting
     name: Greeting
-    # This job runs on Linux
     runs-on: ubuntu-latest
     steps:
       - run: |
@@ -19,9 +17,10 @@ jobs:
           -H "Accept: application/vnd.github.v3+json; application/vnd.github.antiope-preview+json" \
           -X POST \
           -d '{
-            "name":"it works",
+            "name":"it-works",
             "head_sha":"${{ github.event.check_suite.head_sha }}",
-            "status":"in_progress",
-            "output":{"title": "It works report 1","summary": "It works report 2","text": "It works report 3"}
+            "status":"queued",
+            "output":{"title": "It works report 1","summary": "It works report 2"},
+            "images":{"alt": "alt","image_url": "https://avatars1.githubusercontent.com/in/9426?s=40&v=4"}
             }' \
           https://api.github.com/repos/Homebrew/linuxbrew-core/check-runs
