@@ -1,5 +1,7 @@
 on:
- pull_request:
+ check_suite:
+   types:
+     - types: [requested, rerequested]
 
 jobs:
   build:
