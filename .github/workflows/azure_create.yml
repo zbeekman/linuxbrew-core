@@ -18,4 +18,4 @@ jobs:
             "description": "Waiting for azure build validation",
             "context": "homebrew-check"
             }' \
-          https://api.github.com/repos/Homebrew/linuxbrew-core/statuses/${{ github.event.check_suite.head_sha }}
+          https://api.github.com/repos/Homebrew/linuxbrew-core/statuses/${{ github.event.pull_request.head.sha }}
