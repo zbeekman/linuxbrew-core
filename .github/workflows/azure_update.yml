@@ -14,6 +14,13 @@ jobs:
           -H "Content-Type: application/json" \
           -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           -H "Accept: application/vnd.github.v3+json" \
+          -X GET \
+          "${{ github.event.check_suite.url }}"
+      - run: |
+          curl -sSL \
+          -H "Content-Type: application/json" \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
           -X POST \
           -d '{
             "state": "failure",
