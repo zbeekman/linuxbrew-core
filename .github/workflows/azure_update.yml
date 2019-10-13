@@ -1,3 +1,5 @@
+name: Check Azure Build Status
+
 on:
  check_suite:
    types:
