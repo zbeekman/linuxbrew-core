@@ -1,9 +1,8 @@
 name: Check Azure Build Status
 
 on:
- check_suite:
-  types: 
-    - requested
+ check_run:
+  types: [created, rerequested]
 
 jobs:
   build:
