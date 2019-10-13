@@ -1,7 +1,6 @@
 on:
  check_suite:
-   types:
-     - types: [requested, rerequested]
+  types: [requested, rerequested]
 
 jobs:
   build:
