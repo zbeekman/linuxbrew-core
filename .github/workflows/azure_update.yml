@@ -1,5 +1,3 @@
-name: Check Azure Build Status
-
 on:
  check_suite:
    types:
@@ -18,6 +16,6 @@ jobs:
           -d '{
             "state": "failure",
             "description": "The Azure build succeeded with issues!",
-            "context": "homebrew-check"
+            "context": "Check Azure Build Status"
             }' \
           https://api.github.com/repos/Homebrew/linuxbrew-core/statuses/${{ github.event.check_suite.head_sha }}
