@@ -1,7 +1,9 @@
 name: Check Azure Build Status
 
 on:
- pull_request:
+ check_suite:
+   types:
+     - completed
 
 jobs:
   build:
@@ -14,8 +16,8 @@ jobs:
           -H "Accept: application/vnd.github.v3+json" \
           -X POST \
           -d '{
-            "state": "pending",
-            "description": "Waiting for azure build validation",
+            "state": "failure",
+            "description": "The Azure build succeeded with issues!",
             "context": "homebrew-check"
             }' \
           https://api.github.com/repos/Homebrew/linuxbrew-core/statuses/${{ github.event.check_suite.head_sha }}
