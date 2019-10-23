@@ -20,6 +20,7 @@ class Hwloc < Formula
   end
 
   depends_on "pkg-config" => :build
+  depends_on "libxml2" unless OS.mac?
 
   def install
     system "./autogen.sh" if build.head?
