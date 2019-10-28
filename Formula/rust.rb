@@ -53,14 +53,23 @@ class Rust < Formula
   end
 
   resource "cargobootstrap" do
+    # From: https://github.com/rust-lang/rust/blob/#{version}/src/stage0.txt
     if OS.mac?
-      # From https://github.com/rust-lang/rust/blob/#{version}/src/stage0.txt
       url "https://static.rust-lang.org/dist/2019-09-26/cargo-0.39.0-x86_64-apple-darwin.tar.gz"
       sha256 "107af82e268dfe7dbb35908ab0dfd96d0356c3750520612f1add1ecb8ecbc535"
     elsif OS.linux?
-      # From: https://github.com/rust-lang/rust/blob/#{version}/src/stage0.txt
-      url "https://static.rust-lang.org/dist/2019-09-26/cargo-0.39.0-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "406ea5822851cf853a14b250386d47df0a60000410ce8ae92b47dedf8162ba9c"
+      if Hardware::CPU.intel?
+        url "https://static.rust-lang.org/dist/2019-09-26/cargo-0.39.0-x86_64-unknown-linux-gnu.tar.gz"
+        sha256 "406ea5822851cf853a14b250386d47df0a60000410ce8ae92b47dedf8162ba9c"
+      elsif Hardware::CPU.arm?
+        if Hardware::CPU.is_64_bit?
+          url "https://static.rust-lang.org/dist/2019-09-26/cargo-0.39.0-aarch64-unknown-linux-gnu.tar.gz"
+          sha256 "496d008dc715ccd7d509c531cec04d9d432c84d779e7b2b1b3cf5abf3d68d172"
+        else
+          url "https://static.rust-lang.org/dist/2019-09-26/cargo-0.39.0-arm-unknown-linux-gnueabi.tar.gz"
+          sha256 "c46a770868446e293506004f592a1a772bdfac1feb931cb1b3f1159fb780a318"
+        end
+      end
     end
   end
 
