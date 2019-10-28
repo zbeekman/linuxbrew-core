@@ -53,8 +53,13 @@ class Ghc < Formula
   # https://gitlab.haskell.org/ghc/ghc/issues/17146
   resource "binary" do
     if OS.linux?
-      url "https://downloads.haskell.org/~ghc/8.6.5/ghc-8.6.5-x86_64-deb8-linux.tar.xz"
-      sha256 "c419fd0aa9065fe4d2eb9a248e323860c696ddf3859749ca96a84938aee49107"
+      if Hardware::CPU.intel?
+        url "https://downloads.haskell.org/~ghc/8.6.5/ghc-8.6.5-x86_64-deb8-linux.tar.xz"
+        sha256 "c419fd0aa9065fe4d2eb9a248e323860c696ddf3859749ca96a84938aee49107"
+      elsif Hardware::CPU.arm? and Hardware::CPU.is_64_bit?
+        url "https://downloads.haskell.org/ghc/8.6.5/ghc-8.6.5-aarch64-ubuntu18.04-linux.tar.xz"
+        sha256 "1852589037e4b2805ab517bc430e25a3125c4a118a1674ffefbb443394a0c786"
+      end
     else
       url "https://downloads.haskell.org/~ghc/8.6.5/ghc-8.6.5-x86_64-apple-darwin.tar.xz"
       sha256 "dfc1bdb1d303a87a8552aa17f5b080e61351f2823c2b99071ec23d0837422169"
@@ -77,7 +82,7 @@ class Ghc < Formula
     resource("gmp").stage do
       if OS.mac?
         args = "--build=#{Hardware.oldest_cpu}-apple-darwin#{`uname -r`.to_i}"
-      else
+      elsif Hardware::CPU.intel?
         args = "--build=core2-linux-gnu"
       end
       system "./configure", "--prefix=#{gmp}", "--with-pic", "--disable-shared",
